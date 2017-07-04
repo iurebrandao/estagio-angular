@@ -1,4 +1,4 @@
-# `zagu-estagio`
+# `estagio-angular`
 
 This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it
 to quickly bootstrap your angular webapp projects and dev environment for these projects.
@@ -11,22 +11,22 @@ The seed app doesn't do much, just shows how to wire two controllers and views t
 
 ## Getting Started
 
-To get you started you can simply clone the `zagu-estagio` repository and install the dependencies:
+To get you started you can simply clone the `estagio-angular` repository and install the dependencies:
 
 ### Prerequisites
 
-You need git to clone the `zagu-estagio` repository.
+You need git to clone the `estagio-angular` repository.
 
-We also use a number of Node.js tools to initialize and test `zagu-estagio`. You must have Node.js
+We also use a number of Node.js tools to initialize and test `estagio-angular`. You must have Node.js
 and its package manager (npm) installed. You can get them from [here][node].
 
-### Clone `zagu-estagio`
+### Clone `estagio-angular`
 
-Clone the `zagu-estagio` repository using git:
+Clone the `estagio-angular` repository using git:
 
 ```
-git clone https://github.com/zaffalon/ZaguAngularEstagio
-cd ZaguAngularEstagio
+git clone https://github.com/ZaguDeveloper/estagio-angular
+cd estagio-angular
 ```
 ### Install Dependencies
 
@@ -87,17 +87,7 @@ For more information on AngularJS please check out [angularjs.org][angularjs].
 
 [angularjs]: https://angularjs.org/
 [bower]: http://bower.io/
-[git]: https://git-scm.com/
-[http-server]: https://github.com/indexzero/http-server
-[jasmine]: https://jasmine.github.io/
-[jdk]: https://wikipedia.org/wiki/Java_Development_Kit
-[jdk-download]: http://www.oracle.com/technetwork/java/javase/downloads
-[karma]: https://karma-runner.github.io/
 [local-app-url]: http://localhost:8000/index.html
 [node]: https://nodejs.org/
 [npm]: https://www.npmjs.org/
-[protractor]: http://www.protractortest.org/
-[selenium]: http://docs.seleniumhq.org/
-[travis]: https://travis-ci.org/
-[travis-docs]: https://docs.travis-ci.com/user/getting-started
-# zagu-estagio
+# estagio-angular
