@@ -25,7 +25,7 @@ and its package manager (npm) installed. You can get them from [here][node].
 Clone the `estagio-angular` repository using git:
 
 ```
-git clone https://github.com/ZaguDeveloper/estagio-angular
+git clone https://github.com/ZaguDev/estagio-angular
 cd estagio-angular
 ```
 ### Install Dependencies
