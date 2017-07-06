@@ -11,7 +11,8 @@ angular.module('myApp.view1', ['ngRoute'])
             $http({
                 method: "GET",
                 headers: {
-                  //headers aqui
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer seuToken'
                 },
                 url: config.URL + "cards",
             }).then(function (response) {
