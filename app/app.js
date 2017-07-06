@@ -29,5 +29,5 @@ angular.module('myApp', [
     }])
 
     .constant('config', {
-        "URL": "http://localhost:3000/"
+        "URL": "http://estagio.zagu.com.br/"
     });
