@@ -14,12 +14,12 @@ angular.module('myApp.view2', ['ngRoute'])
                   'Authorization': 'Bearer seuToken'
                 },
                 data: {
-
                         "number": "1111 1111 1111 1111",
                         "brand": "visa",
                         "cvv": "777",
                         "expiry_date": "2018-07-03",
                         "exp_year": 2021,
+                        "exp_month":6,
                         "limit": "8000",
                         "name": "Murilo Z Marra"
                 }
