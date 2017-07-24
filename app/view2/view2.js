@@ -11,13 +11,11 @@ angular.module('myApp.view2', ['ngRoute'])
                 url: config.URL + "cards",
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': 'Bearer seuToken'
+                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
                 },
                 data: {
                         "number": "1111 1111 1111 1111",
                         "brand": "visa",
-                        "cvv": "777",
-                        "expiry_date": "2018-07-03",
                         "exp_year": 2021,
                         "exp_month":6,
                         "limit": "8000",
