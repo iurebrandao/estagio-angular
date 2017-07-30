@@ -23,3 +23,16 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+.centered{
+  text-align: center;
+}
+
+.button-add{
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+#div-msg{
+  margin-bottom: 0;
+}

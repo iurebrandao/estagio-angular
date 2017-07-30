@@ -5,13 +5,13 @@ angular.module('myApp.view2', ['ngRoute'])
     .controller('View2Ctrl', ["$http", "config", function ($http, config) {
         var vm = this;
 
-        vm.sendPost = function () {
+        vm.createCard = function (info) {
             $http({
                 method: "POST",
                 url: config.URL + "cards",
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': 'Bearer seuToken'
+                  'Authorization': 'Bearer ' + config.KEY
                 },
                 data: {
                         "number": "1111 1111 1111 1111",
@@ -28,5 +28,5 @@ angular.module('myApp.view2', ['ngRoute'])
                 vm.data = response.data || 'Request failed';
 
             });
-        }
+        };
     }]);

@@ -29,5 +29,6 @@ angular.module('myApp', [
     }])
 
     .constant('config', {
-        "URL": "http://estagio.zagu.com.br/"
+        "URL": "http://estagio.zagu.com.br/",
+        "KEY": "8da3e6d70506552d5023c95eee9c269b"
     });

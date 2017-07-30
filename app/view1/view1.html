@@ -1,11 +1,53 @@
-<div class="container">
+<div class="container" ng-controller="View1Ctrl" ng-init="vm.getCards();">
 
-    <p>This is the partial for view 1.</p>
+    <div class="button-add">
+        <a type="button" href="#!/view2" class="btn btn-primary btn-lg" aria-label="Left Align"> Adicionar cartão
+        </a>
+    </div>
 
-    <button ng-click="vm.sendGet()">Teste de Requisição GET</button>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="centered">Cartões</h3>
+        </div>
 
-    <br>
+        <div ng-if="msg_user" class="alert alert-success alert-dismissible fade in centered" id="div-msg" role="alert">
+            <strong ng-bind="msg_user"></strong>
+        </div>
 
-    <pre>{{ vm.dataView }}</pre>
+        <table ng-if="vm.data.length" class="table table-hover table-striped">
+            <tr>
+                <th>Nome no cartão</th>
+                <th>Mês de expiração</th>
+                <th>Ano de expiração</th>
+                <th>Bandeira</th>
+                <th>Número</th>
+                <th>Limite</th>
+                <th>Limite disponível</th>
+                <th>Editar Cartão</th>
+                <th>Apagar Cartão</th>
+            </tr>
+            <tr ng-repeat="item in vm.data">
+
+                <td>{{item.name}}</td>
+                <td>{{item.exp_month}}</td>
+                <td>{{item.exp_year}}</td>
+                <td>{{item.brand}}</td>
+                <td>{{item.number}}</td>
+                <td>{{item.limit}}</td>
+                <td>{{item.available_limit}}</td>
+                <td class="centered" ng-click="vm.editCard(item.id)">
+                    <button type="button" class="btn btn-success" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                </td>
+                <td class="centered" ng-click="vm.deleteCard(item.id)">
+                    <button type="button" class="btn btn-danger centered" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </td>
+
+            </tr>
+        </table>
+    </div>
 
 </div>
