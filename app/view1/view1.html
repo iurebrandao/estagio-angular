@@ -14,6 +14,10 @@
             <strong ng-bind="msg_user"></strong>
         </div>
 
+        <div ng-if="msg_user_error" class="alert alert-success alert-dismissible fade in centered" id="div-msg-error" role="alert">
+            <strong ng-bind="msg_user_error"></strong>
+        </div>
+
         <table ng-if="vm.data.length" class="table table-hover table-striped">
             <tr>
                 <th>Nome no cartão</th>
@@ -23,8 +27,9 @@
                 <th>Número</th>
                 <th>Limite</th>
                 <th>Limite disponível</th>
-                <th>Editar Cartão</th>
-                <th>Apagar Cartão</th>
+                <th>Pagamentos</th>
+                <th class="centered">Editar Cartão</th>
+                <th class="centered">Apagar Cartão</th>
             </tr>
             <tr ng-repeat="item in vm.data">
 
@@ -35,19 +40,170 @@
                 <td>{{item.number}}</td>
                 <td>{{item.limit}}</td>
                 <td>{{item.available_limit}}</td>
-                <td class="centered" ng-click="vm.editCard(item.id)">
-                    <button type="button" class="btn btn-success" aria-label="Left Align">
+                <td class="centered" ng-init="payments=[]">
+
+                    <button type="button" ng-click="vm.getPayments(item.id)" class="btn btn-primary" aria-label="Left Align" data-toggle="modal" data-target="#{{item.id}}">
+                        <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+                    </button>
+
+                    <div class="modal fade" id="{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="centered">Pagamentos do cartão de número </br> "{{item.number}}"</h3>
+                                </div>
+
+                                <div ng-if="msg_user_pay" class="alert alert-success alert-dismissible fade in centered" id="div-msg-pay" role="alert">
+                                    <strong ng-bind="msg_user_pay"></strong>
+                                </div>
+
+                                <div ng-if="msg_user_error_pay" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error-pay" role="alert">
+                                    <strong ng-bind="msg_user_error_pay"></strong>
+                                </div>
+
+                                <button id="button-pay" type="button"  class="btn btn-primary" aria-label="Left Align" data-toggle="modal" data-target="">
+                                    <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Fazer novo pagamento
+                                </button>
+
+                                <table ng-if="payments.length" class="table table-hover table-striped">
+                                    <tr>
+                                        <th>Valor Total</th>
+                                        <th>Data e Hora</th>
+                                        <th>Status</th>
+                                        <th class="centered">Editar Pagamento</th>
+                                        <th class="centered">Apagar Pagamento</th>
+                                    </tr>
+                                    <tr ng-repeat="pay in payments">
+
+                                        <td>{{pay.amount}}</td>
+                                        <td>{{pay.date}}</td>
+                                        <td>{{pay.status}}</td>
+                                        <td><button type="button" class="btn btn-success" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-danger" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </button></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </td>
+                <td class="centered">
+                    <button type="button" class="btn btn-success" aria-label="Left Align" data-toggle="modal" data-target="#editar{{item.id}}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </button>
+
+                    <div class="modal fade" id="editar{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="panel panel-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <div class="panel-heading">
+                                    <h3 class="centered">Editar Cartão</h3>
+                                </div>
+
+
+                                <div class="panel-body">
+
+                                    <form name="form_add">
+                                        <div class="form-group" ng-class="{'has-error': form_add.nome.$touched && form_add.nome.$invalid}">
+                                            <label class="control-label"> Nome</label><span class="asteriskField">*</span>
+                                            <label class="control-label" ng-show="form_add.nome.$touched && form_add.nome.$invalid"> Campo Obrigatório</label>
+                                            <input name="nome" ng-model="nome" ng-init="nome=item.name" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group" ng-class="{'has-error': form_add.numero.$touched && form_add.numero.$invalid}">
+                                            <label class="control-label">Número</label><span class="asteriskField">*</span>
+                                            <label class="control-label" ng-show="form_add.numero.$touched && form_add.numero.$invalid"> Campo Obrigatório</label>
+                                            <input name="numero" ng-model="numero" ng-init="numero=item.number" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group" ng-class="{'has-error': form_add.bandeira.$touched && form_add.bandeira.$invalid}">
+                                            <label class="control-label">Bandeira</label><span class="asteriskField">*</span>
+                                            <label class="control-label" ng-show="form_add.bandeira.$touched && form_add.bandeira.$invalid"> Campo Obrigatório</label>
+                                            <input name="bandeira" ng-model="bandeira" ng-init="bandeira=item.brand" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group" ng-class="{'has-error': form_add.mes.$touched && form_add.mes.$invalid}">
+                                            <label class="control-label">Mês de expiração</label><span class="asteriskField">*</span>
+                                            <label class="control-label" ng-show="form_add.mes.$touched && form_add.mes.$invalid"> Campo Obrigatório</label>
+                                            <input name="mes" ng-model="mes" ng-init="mes=item.exp_month" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group" ng-class="{'has-error': form_add.ano.$touched && form_add.ano.$invalid}">
+                                            <label class="control-label">Ano de expiração</label><span class="asteriskField">*</span>
+                                            <label class="control-label" ng-show="form_add.ano.$touched && form_add.ano.$invalid"> Campo Obrigatório</label>
+                                            <input name="ano" ng-model="ano" ng-init="ano=item.exp_year" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group" ng-class="{'has-error': form_add.limite.$touched && form_add.limite.$invalid}">
+                                            <label class="control-label">Limite do cartão (Centavos)</label><span class="asteriskField">*</span>
+                                            <label class="control-label" ng-show="form_add.limite.$touched && form_add.limite.$invalid"> Campo Obrigatório</label>
+                                            <input name="limite" ng-model="limite" ng-init="limite=item.limit" class="form-control" required>
+                                        </div>
+
+                                        <div class="centered">
+                                            <button ng-disabled="form_add.nome.$invalid ||
+                                             form_add.numero.$invalid ||
+                                             form_add.bandeira.$invalid ||
+                                             form_add.mes.$invalid ||
+                                             form_add.ano.$invalid ||
+                                             form_add.limite.$invalid"
+                                                    class="btn btn-lg btn-primary centered"
+                                                    data-toggle="modal" data-target="#editar{{item.id}}"
+                                                    ng-click="vm.editCard([item.id,
+                                                         nome,
+                                                         numero,
+                                                         bandeira,
+                                                         parseInt(mes),
+                                                         parseInt(ano),
+                                                         limite])">
+                                                Editar Cartão
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </td>
-                <td class="centered" ng-click="vm.deleteCard(item.id)">
-                    <button type="button" class="btn btn-danger centered" aria-label="Left Align">
+
+                <td class="centered">
+                    <button type="button" class="btn btn-danger centered" aria-label="Left Align" data-toggle="modal" data-target="#delete{{item.id}}">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
+
+                    <div class="modal fade" id="delete{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Apagar Cartão</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza que deseja excluir o cartão de número "{{item.number}}"?
+                                </div>
+                                <div class="modal-footer centered">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="vm.deleteCard(item.id)">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
 
             </tr>
         </table>
     </div>
+
 
 </div>

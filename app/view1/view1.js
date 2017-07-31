@@ -7,7 +7,7 @@ angular.module('myApp.view1', ['ngRoute'])
     .controller('View1Ctrl', ["$scope","$http", "config", function ($scope, $http, config) {
         var vm = this;
 
-        vm.getCards = function (msg) {
+        vm.getCards = function () {
             $http({
                 method: "GET",
                 headers: {
@@ -22,42 +22,39 @@ angular.module('myApp.view1', ['ngRoute'])
                     $scope.msg_user = "Não há nenhum cartão registrado em nosso banco de dados!";
                 }
 
-                if(msg){
-                    $scope.msg_user = msg;
-                }
-
             }, function (response) {
                 vm.data = response.data || 'Request failed';
-                $scope.msg_user = "Erro ao carregar a lista de cartões";
+                $scope.msg_user_error = "Erro ao carregar a lista de cartões";
 
             });
         };
 
-        vm.editCard = function (card_id) {
+        vm.editCard = function (array_info) {
             $http({
                 method: "PATCH",
-                url: config.URL + "cards/" + card_id,
+                url: config.URL + "cards/" + array_info[0],
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + config.KEY
                 },
                 data: {
-                    "id": card_id,
-                    "name": "Marcelo A Silva",
-                    "number": "4000000000000259",
-                    "brand": "visa",
-                    "exp_month": 6,
-                    "exp_year": 2021,
-                    "limit": 845000,
-                    "available_limit": 845000
+                    "id": array_info[0],
+                    "name": array_info[1],
+                    "number": array_info[2],
+                    "brand": array_info[3],
+                    "exp_month": array_info[4],
+                    "exp_year": array_info[5],
+                    "limit": array_info[6],
                 }
             }).then(function (response) {
                 vm.data = response.data;
-                vm.getCards("Cartão editado com sucesso!");
+                $scope.msg_user = "Cartão editado com sucesso!";
+                vm.getCards();
 
-            }, function (response) {
+
+            }, function (response)  {
                 vm.data = response.data || 'Request failed';
-                $scope.msg_user = "Erro ao editar o cartão";
+                $scope.msg_user_error = "Erro ao editar o cartão";
 
             });
         };
@@ -75,11 +72,34 @@ angular.module('myApp.view1', ['ngRoute'])
                     "id": card_id
                 }
             }).then(function (response) {
-                vm.getCards("Cartão removido com sucesso!");
+                vm.getCards();
+                $scope.msg_user = "Cartão removido com sucesso!";
 
             }, function (response) {
                 vm.data = response.data || 'Request failed';
-                $scope.msg_user = "Erro ao deletar o cartão";
+                $scope.msg_user_error = "Erro ao deletar o cartão";
+
+            });
+        };
+
+        vm.getPayments = function (card_id) {
+            $http({
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + config.KEY
+                },
+                url: config.URL + "cards/" + card_id + "/payments"
+            }).then(function (response) {
+                $scope.payments = response.data;
+
+                if(response.data.length < 1){
+                    $scope.msg_user_pay = "Não há nenhum pagamento registrado neste cartão";
+                }
+
+
+            }, function (response) {
+                $scope.msg_user_error_pay = "Erro ao carregar os pagamentos desse cartão";
 
             });
         };

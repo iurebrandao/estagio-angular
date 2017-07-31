@@ -1,12 +1,79 @@
-<div class="container">
+<div class="container" ng-controller="View2Ctrl">
 
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="centered">Adicionar Cartão</h3>
             </div>
+
+            <div ng-if="msg" class="alert alert-success alert-dismissible fade in centered" id="div-msg-error" role="alert">
+                <strong ng-bind="msg"></strong>
+            </div>
+
+            <div ng-if="msg_error" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error" role="alert">
+                <strong ng-bind="msg_error"></strong>
+            </div>
+
+            <div class="panel-body">
+
+                <form name="form_add" >
+                    <div class="form-group" ng-class="{'has-error': form_add.nome.$touched && form_add.nome.$invalid}">
+                        <label class="control-label"> Nome</label><span class="asteriskField">*</span>
+                        <label class="control-label" ng-show="form_add.nome.$touched && form_add.nome.$invalid"> Campo Obrigatório</label>
+                        <input name="nome" ng-model="nome" class="form-control" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': form_add.numero.$touched && form_add.numero.$invalid}">
+                        <label class="control-label">Número</label><span class="asteriskField">*</span>
+                        <label class="control-label" ng-show="form_add.numero.$touched && form_add.numero.$invalid"> Campo Obrigatório</label>
+                        <input name="numero" ng-model="numero" class="form-control" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': form_add.bandeira.$touched && form_add.bandeira.$invalid}">
+                        <label class="control-label">Bandeira</label><span class="asteriskField">*</span>
+                        <label class="control-label" ng-show="form_add.bandeira.$touched && form_add.bandeira.$invalid"> Campo Obrigatório</label>
+                        <input name="bandeira" ng-model="bandeira" class="form-control" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': form_add.mes.$touched && form_add.mes.$invalid}">
+                        <label class="control-label">Mês de expiração</label><span class="asteriskField">*</span>
+                        <label class="control-label" ng-show="form_add.mes.$touched && form_add.mes.$invalid"> Campo Obrigatório</label>
+                        <input name="mes" ng-model="mes" type="number" class="form-control" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': form_add.ano.$touched && form_add.ano.$invalid}">
+                        <label class="control-label">Ano de expiração</label><span class="asteriskField">*</span>
+                        <label class="control-label" ng-show="form_add.ano.$touched && form_add.ano.$invalid"> Campo Obrigatório</label>
+                        <input name="ano" ng-model="ano" type="number" class="form-control" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': form_add.limite.$touched && form_add.limite.$invalid}">
+                        <label class="control-label">Limite do cartão (Centavos)</label><span class="asteriskField">*</span>
+                        <label class="control-label" ng-show="form_add.limite.$touched && form_add.limite.$invalid"> Campo Obrigatório</label>
+                        <input name="limite" ng-model="limite" type="number" class="form-control" required>
+                    </div>
+
+                    <div class="centered">
+                        <button ng-disabled="form_add.nome.$invalid ||
+                                             form_add.numero.$invalid ||
+                                             form_add.bandeira.$invalid ||
+                                             form_add.mes.$invalid ||
+                                             form_add.ano.$invalid ||
+                                             form_add.limite.$invalid"
+                                class="btn btn-lg btn-primary centered"
+                                ng-click="createCard([nome,
+                                                         numero,
+                                                         bandeira,
+                                                         mes,
+                                                         ano,
+                                                         limite])">
+                            Adicionar Cartão
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
     </div>
-
-
 </div>

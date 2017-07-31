@@ -1,38 +1,64 @@
 /* app css stylesheet */
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
 }
 
 .menu:before {
-  content: "[";
+    content: "[";
 }
 
 .menu:after {
-  content: "]";
+    content: "]";
 }
 
 .menu > li {
-  display: inline;
+    display: inline;
 }
 
 .menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+    content: "|";
+    padding-right: 0.3em;
 }
 
 .centered{
-  text-align: center;
+    text-align: center;
 }
 
 .button-add{
-  text-align: center;
-  margin-bottom: 2%;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
-#div-msg{
-  margin-bottom: 0;
+#div-msg, #div-msg-error,
+#div-msg-pay, #div-msg-error-pay{
+    margin-bottom: 0;
+}
+
+#button-pay{
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.background{
+    background: url("back.jpg");
+    background-repeat: no-repeat;
+    margin-top: 0;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar-default{
+    margin-bottom: 0;
+}
+
+body, html {
+    height: 100%;
+
 }
