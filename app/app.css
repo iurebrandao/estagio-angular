@@ -62,6 +62,8 @@ body, html {
     height: 100%;
 }
 
+body { padding-right: 0 !important }
+
 #loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -76,6 +78,20 @@ body, html {
 
 }
 
+.loader-pay{
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 100px;
+    height: 100px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-left: 43%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
@@ -84,4 +100,8 @@ body, html {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#panel-add{
+    margin-top: 2%;
 }
