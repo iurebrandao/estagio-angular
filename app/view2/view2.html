@@ -6,16 +6,19 @@
                 <h3 class="centered">Adicionar Cartão</h3>
             </div>
 
+            <!--Mensagens de sucesso-->
             <div ng-if="msg" class="alert alert-success alert-dismissible fade in centered" id="div-msg-error" role="alert">
                 <strong ng-bind="msg"></strong>
             </div>
 
+            <!--Mensagens de erro-->
             <div ng-if="msg_error" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error" role="alert">
                 <strong ng-bind="msg_error"></strong>
             </div>
 
             <div class="panel-body">
 
+                <!-- Formulário para adicionar um novo cartão-->
                 <form name="form_add" >
                     <div class="form-group" ng-class="{'has-error': form_add.nome.$touched && form_add.nome.$invalid}">
                         <label class="control-label"> Nome</label><span class="asteriskField">*</span>

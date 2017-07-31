@@ -12,16 +12,19 @@
             <h3 class="centered">Cartões</h3>
         </div>
 
+        <!--Mensagens de sucesso-->
         <div ng-if="msg_user" class="alert alert-success alert-dismissible fade in centered" id="div-msg" role="alert">
             <strong ng-bind="msg_user"></strong>
         </div>
 
+        <!--Mensagens de erro-->
         <div ng-if="msg_user_error" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error" role="alert">
             <strong ng-bind="msg_user_error"></strong>
         </div>
 
         <div id="loader"></div>
 
+        <!--Tabela com a lista de cartões-->
         <table ng-if="vm.data.length" class="table table-hover table-striped">
             <tr>
                 <th>Nome no cartão</th>
@@ -50,6 +53,7 @@
                         <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
                     </button>
 
+                    <!-- Modal para visualizar os pagamentos de cada cartão-->
                     <div class="modal fade" id="{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -60,10 +64,12 @@
                                     <h3 class="centered">Pagamentos do cartão de número </br> "{{item.number}}"</h3>
                                 </div>
 
+                                <!--Mensagens de sucesso no modal de pagamentos-->
                                 <div ng-if="msg_user_pay" class="alert alert-success alert-dismissible fade in centered" id="div-msg-pay" role="alert">
                                     <strong ng-bind="msg_user_pay"></strong>
                                 </div>
 
+                                <!--Mensagens de erro no modal de pagamentos-->
                                 <div ng-if="msg_user_error_pay" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error-pay" role="alert">
                                     <strong ng-bind="msg_user_error_pay"></strong>
                                 </div>
@@ -74,6 +80,7 @@
 
                                 <div class="loader-pay" id="loader{{item.id}}"></div>
 
+                                <!--Tabela dos pagamentos de um determinado cartão-->
                                 <table ng-if="payments[0].length" class="table table-hover table-striped">
                                     <tr>
                                         <th>Valor Total</th>
@@ -104,7 +111,7 @@
                         </div>
                     </div>
 
-                    <!--Modal de novo pagamento-->
+                    <!--Modal com um formulário para criar um novo pagamento -->
                     <div class="modal fade" id="pay{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="panel panel-primary">
@@ -139,7 +146,7 @@
                         </div>
                     </div>
 
-                    <!--Modal de editar pagamento-->
+                    <!--Modal com um formulário para editar um pagamento-->
                     <div ng-repeat="pay in payments[0]" class="modal fade" id="edit_pay{{pay.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="panel panel-primary">
@@ -184,6 +191,7 @@
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </button>
 
+                    <!--Modal com um formulário para editar um cartão-->
                     <div class="modal fade" id="editar{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="panel panel-primary">
@@ -266,6 +274,7 @@
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
 
+                    <!-- Modal para confirmação de exclusão de determinado cartão-->
                     <div class="modal fade" id="delete{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
