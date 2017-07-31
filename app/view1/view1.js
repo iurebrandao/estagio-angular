@@ -37,6 +37,8 @@ angular.module('myApp.view1', ['ngRoute'])
         };
 
         vm.editCard = function (array_info) {
+            var mes = parseInt(array_info[4]);
+            var ano = parseInt(array_info[5]);
             $http({
                 method: "PATCH",
                 url: config.URL + "cards/" + array_info[0],
@@ -49,8 +51,8 @@ angular.module('myApp.view1', ['ngRoute'])
                     "name": array_info[1],
                     "number": array_info[2],
                     "brand": array_info[3],
-                    "exp_month": array_info[4],
-                    "exp_year": array_info[5],
+                    "exp_month": mes,
+                    "exp_year": ano,
                     "limit": array_info[6],
                 }
             }).then(function (response) {
@@ -62,6 +64,7 @@ angular.module('myApp.view1', ['ngRoute'])
             }, function (response)  {
                 vm.data = response.data || 'Request failed';
                 $scope.msg_user_error = "Erro ao editar o cartão";
+                vm.getCards();
 
             });
         };
