@@ -8,6 +8,9 @@ angular.module('myApp.view1', ['ngRoute'])
         var vm = this;
 
         vm.getCards = function () {
+
+            document.getElementById("loader").style.display = "block";
+
             $http({
                 method: "GET",
                 headers: {
@@ -16,6 +19,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 },
                 url: config.URL + "cards"
             }).then(function (response) {
+                document.getElementById("loader").style.display = "none";
                 vm.data = response.data;
 
                 if(vm.data.length < 1){
@@ -23,6 +27,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
 
             }, function (response) {
+                document.getElementById("loader").style.display = "none";
                 vm.data = response.data || 'Request failed';
                 $scope.msg_user_error = "Erro ao carregar a lista de cartões";
 
