@@ -1,7 +1,7 @@
-<div class="container" ng-controller="View1Ctrl" ng-init="vm.getCards();">
+<div class="container" ng-controller="CartaoCtrl" ng-init="vm.getCards();">
 
     <div class="button-add">
-        <a type="button" href="#!/view2" class="btn btn-primary  btn-lg" aria-label="Left Align">
+        <a type="button" href="#!/cartao_add" class="btn btn-primary  btn-lg" aria-label="Left Align">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
             Adicionar cartão
         </a>
@@ -50,7 +50,7 @@
                 <td class="centered">
 
                     <a type="button" class="btn btn-primary"
-                     ng-href="#!/view3/cartaoId/{{item.id}}" aria-label="Left Align">
+                     ng-href="#!/pagamento/cartaoId/{{item.id}}" aria-label="Left Align">
                         <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
                     </a>
 

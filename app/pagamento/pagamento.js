@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.pagamento', ['ngRoute'])
 
-    .controller('View3Ctrl', ["$scope", "$location", "$http", "$routeParams", "config", 
+    .controller('PagamentoCtrl', ["$scope", "$location", "$http", "$routeParams", "config", 
 	function ($scope, $location, $http, $routeParams, config) {
         var vm = this;
 

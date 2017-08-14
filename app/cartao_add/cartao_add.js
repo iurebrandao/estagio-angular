@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.cartao_add', ['ngRoute'])
 
-    .controller('View2Ctrl', ["$scope", "$location", "$http", "config",
+    .controller('CartaoAddCtrl', ["$scope", "$location", "$http", "config",
         function ($scope, $location, $http, config) {
             var vm = this;
 

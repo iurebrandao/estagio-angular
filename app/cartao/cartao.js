@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.cartao', ['ngRoute'])
 
 
 
-    .controller('View1Ctrl', ["$scope","$http", "config", function ($scope, $http, config) {
+    .controller('CartaoCtrl', ["$scope","$http", "config", function ($scope, $http, config) {
         var vm = this;
 
         // Inicializa a variável payments para receber os pagamentos de cada cartão
