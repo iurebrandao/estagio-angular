@@ -20,6 +20,8 @@ angular.module('myApp.view2', ['ngRoute'])
             // Essas informações são armazenadas no "array_info".
             $scope.createCard = function (array_info) {
 
+                console.log(array_info);
+
                 // Faz a requisição "POST" para criar um novo cartão
                 $http({
                     method: "POST",
