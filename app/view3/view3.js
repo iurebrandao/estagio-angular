@@ -7,7 +7,7 @@ angular.module('myApp.view3', ['ngRoute'])
         var vm = this;
 
         // Funcão que recupera os pagamentos de um determinado cartão a partir do "id" dele
-        vm.getPayments = function (card_id, msg_user) {
+        vm.getPayments = function (card_id, msg_user, msg_user_error) {
 
             // Cria o elemento "spinner" que indica o carregamento das informações para o usuário
             document.getElementById("loader").style.display = "block";
@@ -40,6 +40,10 @@ angular.module('myApp.view3', ['ngRoute'])
 
                 if(msg_user){
                 	vm.msg_user = msg_user;
+                }
+
+                if(msg_user_error){
+                	vm.msg_user_error = msg_user_error;
                 }
 
             }, function (response) {
@@ -90,7 +94,7 @@ angular.module('myApp.view3', ['ngRoute'])
                 var msg_user_error = "Erro ao fazer o pagamento! Valor do pagamento maior que o disponível";
 
                 // Chama a função para atualizar a lista de pagamentos com as novas informações
-                vm.getPayments($routeParams.cartaoId,msg_user_error);
+                vm.getPayments($routeParams.cartaoId,"",msg_user_error);
             });
         };
 
@@ -127,7 +131,7 @@ angular.module('myApp.view3', ['ngRoute'])
                 var msg_user_error = "Erro ao deletar o pagamento";
 
                 // Chama a função para atualizar a lista de pagamentos com as novas informações
-                vm.getPayments($routeParams.cartaoId, msg_user_error);
+                vm.getPayments($routeParams.cartaoId,"", msg_user_error);
 
             });
         };
@@ -181,7 +185,7 @@ angular.module('myApp.view3', ['ngRoute'])
                 var msg_user_error = "Erro ao editar o pagamento";
 
                 // Chama a função para atualizar a lista de pagamentos com as novas informações
-                vm.getPayments($routeParams.cartaoId, msg_user_error );
+                vm.getPayments($routeParams.cartaoId, "", msg_user_error );
 
             });
         };
