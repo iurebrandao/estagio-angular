@@ -17,10 +17,7 @@
             <strong ng-bind="msg_user"></strong>
         </div>
 
-        <!--Mensagens de erro-->
-        <div ng-if="msg_user_error" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error" role="alert">
-            <strong ng-bind="msg_user_error"></strong>
-        </div>
+        <error errors="errors"></error>
 
         <div id="loader"></div>
 

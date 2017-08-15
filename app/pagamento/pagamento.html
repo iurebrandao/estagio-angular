@@ -10,10 +10,7 @@
             <strong ng-bind="vm.msg_user"></strong>
         </div>
 
-        <!--Mensagens de erro no modal de pagamentos-->
-        <div ng-if="vm.msg_user_error" class="alert alert-danger alert-dismissible fade in centered" id="div-msg-error-pay" role="alert">
-            <strong ng-bind="vm.msg_user_error"></strong>
-        </div>
+        <error errors="errors"></error>
 
         <div class="centered">
             <button id="button-pay" type="button"  class="btn btn-primary" aria-label="Left Align" data-dismiss="modal" data-toggle="modal" data-target="#pay{{vm.cartaoId}}">

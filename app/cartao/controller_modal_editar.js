@@ -1,6 +1,7 @@
 angular.module('myApp.cartao')
     .controller('ModalEditarCartaoCtrl', function ($scope, $uibModalInstance, $http, config, id_cartao) {
         var vmModal = this;
+        $scope.errors = {};
 
         $http({
             method: "GET",
@@ -59,8 +60,7 @@ angular.module('myApp.cartao')
             }, function (response)  {
 
                 // Mensagem adicionada para aparecer na view como retorno para o usuário
-                $scope.msg_user_error = "Erro ao editar o cartão";
-                $uibModalInstance.close();
+                $scope.errors = [response.data.message];
             });
         };
 

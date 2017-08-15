@@ -4,6 +4,7 @@ angular.module('myApp.cartao', ['ngRoute'])
 
     .controller('CartaoCtrl', ["$scope","$http", "config", "$uibModal", "$log", "$document", function ($scope, $http, config, $uibModal, $log, $document) {
         var vm = this;
+        $scope.errors = {};
 
         // Inicializa a variável payments para receber os pagamentos de cada cartão
         $scope.payments={};
@@ -42,7 +43,7 @@ angular.module('myApp.cartao', ['ngRoute'])
                 document.getElementById("loader").style.display = "none";
 
                 // Adiciona as informações de retorno da requisição na variável do controler
-                vm.data = response.data || 'Request failed';
+                $scope.errors = response.data;
 
                 // Mensagem adicionada para aparecer na view como retorno para o usuário
                 $scope.msg_user_error = "Erro ao carregar a lista de cartões";
