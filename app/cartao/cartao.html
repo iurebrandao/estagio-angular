@@ -1,4 +1,4 @@
-<div class="container" ng-controller="CartaoCtrl" ng-init="vm.getCards();">
+<div class="container" ng-init="vm.getCards();">
 
     <div class="button-add">
         <a type="button" href="#!/cartao_add" class="btn btn-primary  btn-lg" aria-label="Left Align">
@@ -56,88 +56,11 @@
 
                 </td>
                 <td class="centered">
-                    <button type="button" class="btn btn-success" aria-label="Left Align" data-toggle="modal" data-target="#editar{{item.id}}">
+                    <button type="button" class="btn btn-success" ng-click="vm.openModal(null,null,item.id)">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </button>
 
-                    <!--Modal com um formulário para editar um cartão-->
-                    <div class="modal fade" id="editar{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="panel panel-primary">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <div class="panel-heading">
-                                    <h3 class="centered">Editar Cartão</h3>
-                                </div>
-
-
-                                <div class="panel-body">
-
-                                    <form name="form_add">
-                                        <div class="form-group" ng-class="{'has-error': form_add.nome.$touched && form_add.nome.$invalid}">
-                                            <label class="control-label"> Nome</label><span class="asteriskField">*</span>
-                                            <label class="control-label" ng-show="form_add.nome.$touched && form_add.nome.$invalid"> Campo Obrigatório</label>
-                                            <input name="nome" ng-model="nome" ng-init="nome=item.name" class="form-control" required>
-                                        </div>
-
-                                        <div class="form-group" ng-class="{'has-error': form_add.numero.$touched && form_add.numero.$invalid}">
-                                            <label class="control-label">Número</label><span class="asteriskField">*</span>
-                                            <label class="control-label" ng-show="form_add.numero.$touched && form_add.numero.$invalid"> Campo Obrigatório</label>
-                                            <input name="numero" ng-model="numero" ng-init="numero=item.number" class="form-control" ui-credit-card required>
-                                        </div>
-
-                                        <div class="form-group" ng-class="{'has-error': form_add.bandeira.$touched && form_add.bandeira.$invalid}">
-                                            <label class="control-label">Bandeira</label><span class="asteriskField">*</span>
-                                            <label class="control-label" ng-show="form_add.bandeira.$touched && form_add.bandeira.$invalid"> Campo Obrigatório</label>
-                                            <select name="bandeira" ng-model="bandeira" class="form-control" required>
-                                                <option>visa</option>
-                                                <option>mastercard</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group" ng-class="{'has-error': form_add.mes.$touched && form_add.mes.$invalid}">
-                                            <label class="control-label">Mês de expiração</label><span class="asteriskField">*</span>
-                                            <label class="control-label" ng-show="form_add.mes.$touched && form_add.mes.$invalid"> Campo Obrigatório</label>
-                                            <input name="mes" ng-model="mes" ng-init="mes=item.exp_month" class="form-control" required>
-                                        </div>
-
-                                        <div class="form-group" ng-class="{'has-error': form_add.ano.$touched && form_add.ano.$invalid}">
-                                            <label class="control-label">Ano de expiração</label><span class="asteriskField">*</span>
-                                            <label class="control-label" ng-show="form_add.ano.$touched && form_add.ano.$invalid"> Campo Obrigatório</label>
-                                            <input name="ano" ng-model="ano" ng-init="ano=item.exp_year" class="form-control" required>
-                                        </div>
-
-                                        <div class="form-group" ng-class="{'has-error': form_add.limite.$touched && form_add.limite.$invalid}">
-                                            <label class="control-label">Limite do cartão (Centavos)</label><span class="asteriskField">*</span>
-                                            <label class="control-label" ng-show="form_add.limite.$touched && form_add.limite.$invalid"> Campo Obrigatório</label>
-                                            <input name="limite" ng-model="limite" ng-init="limite=item.limit" class="form-control" required>
-                                        </div>
-
-                                        <div class="centered">
-                                            <button ng-disabled="form_add.nome.$invalid ||
-                                             form_add.numero.$invalid ||
-                                             form_add.bandeira.$invalid ||
-                                             form_add.mes.$invalid ||
-                                             form_add.ano.$invalid ||
-                                             form_add.limite.$invalid"
-                                                    class="btn btn-lg btn-primary centered"
-                                                    data-toggle="modal" data-target="#editar{{item.id}}"
-                                                    ng-click="vm.editCard(item.id,
-                                                         nome,
-                                                         numero,
-                                                         bandeira,
-                                                         mes,
-                                                         ano,
-                                                         limite)">
-                                                Editar Cartão
-                                            </button>
-                                        </div>
-
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Modal editar cartao -->
 
                 </td>
 
