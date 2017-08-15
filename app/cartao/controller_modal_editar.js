@@ -1,5 +1,5 @@
 angular.module('myApp.cartao')
-    .controller('ModalEditarCartaoCtrl', function ($scope, $uibModalInstance, $http, config, id_cartao) {
+    .controller('ModalEditarCartaoCtrl', function ($scope, $uibModalInstance, $http, config, $window , id_cartao) {
         var vmModal = this;
         $scope.errors = {};
 
@@ -7,7 +7,7 @@ angular.module('myApp.cartao')
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + config.KEY
+                'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
             },
             url: config.URL + "cards/" + id_cartao
         }).then(function (response) {
@@ -40,7 +40,7 @@ angular.module('myApp.cartao')
                 url: config.URL + "cards/" + id,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 data: {
                     "id": id,

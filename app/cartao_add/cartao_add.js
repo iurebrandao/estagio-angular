@@ -2,8 +2,8 @@
 
 angular.module('myApp.cartao_add', ['ngRoute'])
 
-    .controller('CartaoAddCtrl', ["$scope", "$location", "$http", "config",
-        function ($scope, $location, $http, config) {
+    .controller('CartaoAddCtrl', ["$scope", "$location", "$http", "config", "$window",
+        function ($scope, $location, $http, config, $window) {
             var vm = this;
 
             // Função para resetar os campos do formulário de criacão de um novo cartão
@@ -25,7 +25,7 @@ angular.module('myApp.cartao_add', ['ngRoute'])
                     url: config.URL + "cards",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + config.KEY
+                        'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                     },
                     data: {
                         "name": nome,

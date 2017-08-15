@@ -2,8 +2,8 @@
 
 angular.module('myApp.pagamento', ['ngRoute'])
 
-    .controller('PagamentoCtrl', ["$scope", "$location", "$http", "$routeParams", "config", 
-	function ($scope, $location, $http, $routeParams, config) {
+    .controller('PagamentoCtrl', ["$scope", "$location", "$http", "$routeParams", "config", "$window",
+	function ($scope, $location, $http, $routeParams, config, $window) {
         var vm = this;
 
         // Funcão que recupera os pagamentos de um determinado cartão a partir do "id" dele
@@ -17,7 +17,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 url: config.URL + "cards/" + card_id + "/payments"
             }).then(function (response) {
@@ -66,7 +66,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
                 url: config.URL + "payments",
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 data: {
                     "card_id": id_cartao,
@@ -106,7 +106,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
                 url: config.URL + "payments/" + pay_id,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 data: {
                     "id": pay_id
@@ -158,7 +158,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
                 url: config.URL + "payments/" + id_pagamento,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 data: {
                     "id": id_pagamento,

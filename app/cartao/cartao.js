@@ -2,9 +2,10 @@
 
 angular.module('myApp.cartao', ['ngRoute'])
 
-    .controller('CartaoCtrl', ["$scope","$http", "config", "$uibModal", "$log", "$document", function ($scope, $http, config, $uibModal, $log, $document) {
+    .controller('CartaoCtrl', ["$scope","$http", "config", "$uibModal", "$log", "$document" , "$window", function ($scope, $http, config, $uibModal, $log, $document, $window) {
         var vm = this;
         $scope.errors = {};
+        $window.localStorage.setItem("key","8da3e6d70506552d5023c95eee9c269b");
 
         // Inicializa a variável payments para receber os pagamentos de cada cartão
         $scope.payments={};
@@ -20,7 +21,7 @@ angular.module('myApp.cartao', ['ngRoute'])
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 url: config.URL + "cards"
             }).then(function (response) {
@@ -63,7 +64,7 @@ angular.module('myApp.cartao', ['ngRoute'])
                 url: config.URL + "cards/" + id_cartao,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + config.KEY
+                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
                 },
                 data: {
                     "id": id_cartao
