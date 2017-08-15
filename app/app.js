@@ -6,7 +6,8 @@ angular.module('myApp', [
     'myApp.cartao',
     'myApp.cartao_add',
     'myApp.pagamento',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.utils.masks'
 ])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {

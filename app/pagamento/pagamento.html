@@ -72,7 +72,7 @@
                                             <button ng-disabled="form_edit_pay.status.$pristine"
                                             class="btn btn-lg btn-primary centered"
                                             data-dismiss="modal"
-                                            ng-click="vm.editPayment([pay.id,status])">
+                                            ng-click="vm.editPayment(pay.id,status)">
                                             Editar pagamento
                                             </button>
                                         </div>
@@ -101,19 +101,19 @@
 
                             <div class="panel-body">
 
-                                <form name="form_new_pay">
-                                    <div class="form-group" ng-class="{'has-error': form_new_pay.valor.$touched && form_new_pay.valor.$invalid}">
+                                <form name="form_pay">
+                                    <div class="form-group" ng-class="{'has-error': form_pay.valor.$touched && form_pay.valor.$invalid}">
                                         <label class="control-label"> Valor do pagamento (Centavos)</label><span class="asteriskField">*</span>
-                                        <label class="control-label" ng-show="form_new_pay.valor.$touched && form_new_pay.valor.$invalid"> Campo Obrigatório</label>
+                                        <label class="control-label" ng-show="form_pay.valor.$touched && form_pay.valor.$invalid"> Campo Obrigatório</label>
                                         <input name="valor" ng-model="valor" class="form-control" required>
                                     </div>
 
 
                                     <div class="centered">
-                                        <button ng-disabled="form_new_pay.valor.$invalid"
+                                        <button ng-disabled="form_pay.valor.$invalid"
                                         class="btn btn-lg btn-primary centered"
                                         data-dismiss="modal"
-                                        ng-click="vm.makePayment([vm.cartaoId,valor])">
+                                        ng-click="vm.makePayment(vm.cartaoId,valor)">
                                         Fazer pagamento
                                         </button>
                                     </div>

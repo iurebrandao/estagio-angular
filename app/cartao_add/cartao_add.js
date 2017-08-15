@@ -17,10 +17,7 @@ angular.module('myApp.cartao_add', ['ngRoute'])
             };
 
             // Função que cria um cartão a partir das informações inseridas pelo usuário.
-            // Essas informações são armazenadas no "array_info".
-            $scope.createCard = function (array_info) {
-
-                console.log(array_info);
+            $scope.createCard = function (nome,numero,bandeira,mes,ano,limite) {
 
                 // Faz a requisição "POST" para criar um novo cartão
                 $http({
@@ -31,12 +28,12 @@ angular.module('myApp.cartao_add', ['ngRoute'])
                         'Authorization': 'Bearer ' + config.KEY
                     },
                     data: {
-                        "name": array_info[0],
-                        "number": array_info[1],
-                        "brand": array_info[2],
-                        "exp_month":array_info[3],
-                        "exp_year": array_info[4],
-                        "limit": array_info[5],
+                        "name": nome,
+                        "number": numero,
+                        "brand": bandeira,
+                        "exp_month":mes,
+                        "exp_year": ano,
+                        "limit": limite
                     }
                 }).then(function (response) {
                     vm.data = response.data;

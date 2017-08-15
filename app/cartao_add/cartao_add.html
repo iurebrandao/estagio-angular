@@ -29,7 +29,7 @@
                     <div class="form-group" ng-class="{'has-error': form_add.numero.$touched && form_add.numero.$invalid}">
                         <label class="control-label">Número</label><span class="asteriskField">*</span>
                         <label class="control-label" ng-show="form_add.numero.$touched && form_add.numero.$invalid"> Campo Obrigatório</label>
-                        <input name="numero" ng-model="numero" class="form-control" required>
+                        <input name="numero" ng-model="numero" class="form-control" ui-credit-card required>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': form_add.bandeira.$touched && form_add.bandeira.$invalid}">
@@ -67,12 +67,12 @@
                                              form_add.ano.$invalid ||
                                              form_add.limite.$invalid"
                                 class="btn btn-lg btn-primary centered"
-                                ng-click="createCard([nome,
-                                                         numero,
-                                                         bandeira,
-                                                         mes,
-                                                         ano,
-                                                         limite])">
+                                ng-click="createCard(nome,
+                                                     numero,
+                                                     bandeira,
+                                                     mes,
+                                                     ano,
+                                                     limite)">
                             Adicionar Cartão
                         </button>
                     </div>

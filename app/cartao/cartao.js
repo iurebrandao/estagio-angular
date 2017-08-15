@@ -56,28 +56,28 @@ angular.module('myApp.cartao', ['ngRoute'])
         };
 
         // Função que altera as informações de um cartão a partir das informações novas que o
-        // usuário quer editar, que estão no "array_info"
-        vm.editCard = function (array_info) {
+        // usuário quer editar
+        vm.editCard = function (id_cartao,nome,numero,bandeira,mes,ano,limite) {
 
-            var mes = parseInt(array_info[4]);
-            var ano = parseInt(array_info[5]);
+            var mes_exp = parseInt(mes);
+            var ano_exp = parseInt(ano);
 
             // Faz a requisição "PATCH" para editar um cartão
             $http({
                 method: "PATCH",
-                url: config.URL + "cards/" + array_info[0],
+                url: config.URL + "cards/" + id_cartao,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + config.KEY
                 },
                 data: {
-                    "id": array_info[0],
-                    "name": array_info[1],
-                    "number": array_info[2],
-                    "brand": array_info[3],
-                    "exp_month": mes,
-                    "exp_year": ano,
-                    "limit": array_info[6]
+                    "id": id_cartao,
+                    "name": nome,
+                    "number": numero,
+                    "brand": bandeira,
+                    "exp_month": mes_exp,
+                    "exp_year": ano_exp,
+                    "limit": limite
                 }
             }).then(function (response) {
 
@@ -106,18 +106,18 @@ angular.module('myApp.cartao', ['ngRoute'])
         };
 
         // Função que deleta um cartão da lista de cartões a partir do "id" desse cartão
-        vm.deleteCard = function (card_id) {
+        vm.deleteCard = function (id_cartao) {
 
             // Faz a requisição "DELETE" para deletar um cartão
             $http({
                 method: "DELETE",
-                url: config.URL + "cards/" + card_id,
+                url: config.URL + "cards/" + id_cartao,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + config.KEY
                 },
                 data: {
-                    "id": card_id
+                    "id": id_cartao
                 }
             }).then(function (response) {
 

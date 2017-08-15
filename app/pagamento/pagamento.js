@@ -23,7 +23,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
             }).then(function (response) {
 
                 // Esconde o elemento "spinner" que indica o carregamento das informações para o usuário
-                document.getElementById("loader").style.display = "none"
+                document.getElementById("loader").style.display = "none";
 
                 // Adiciona as informações de pagamento em "payments"
                 // para mostrar na tabela de pagamentos na view
@@ -52,14 +52,13 @@ angular.module('myApp.pagamento', ['ngRoute'])
                 vm.msg_user_error = "Erro ao carregar os pagamentos desse cartão";
 
                 // Esconde o elemento "spinner" que indica o carregamento das informações para o usuário
-                document.getElementById("loader").style.display = "none"
+                document.getElementById("loader").style.display = "none";
 
             });
         };
 
         // Função que faz o pagamento de um cartão a partir do "id" do cartão e o valor do pagamento
-        // contidos na variável "array_info"
-        vm.makePayment = function (array_info) {
+        vm.makePayment = function (id_cartao,valor) {
 
             // Faz a requisição "POST" para fazer o pagamento de um cartão
             $http({
@@ -70,8 +69,8 @@ angular.module('myApp.pagamento', ['ngRoute'])
                     'Authorization': 'Bearer ' + config.KEY
                 },
                 data: {
-                    "card_id": array_info[0],
-                    "amount": array_info[1]
+                    "card_id": id_cartao,
+                    "amount": valor
                 }
 
             }).then(function (response) {
@@ -136,39 +135,34 @@ angular.module('myApp.pagamento', ['ngRoute'])
             });
         };
 
-        // Função que edita o status de um pagamento a partir do "id". Essas duas informações
-        // são recebidas pelo "array_info"
-        vm.editPayment = function (array_info) {
+        // Função que edita o status de um pagamento a partir do "id"
+        vm.editPayment = function (id_pagamento,status) {
 
-        	console.log(array_info);
-
-            var status = '';
+            var status_correto = '';
 
             // A partir de um item selecionado pelo usuário, é colocado o status correto para fazer
             // a requisição
-            if(array_info[1] === 'Pago'){
-                status = 'paid';
+            if(status === 'Pago'){
+                status_correto = 'paid';
             }
-            else if(array_info[1] === 'Pendente'){
-                status = 'pending';
+            else if(status === 'Pendente'){
+                status_correto = 'pending';
             }
-            else if(array_info[1] === 'Falhado'){
-                status = 'failed';
+            else if(status === 'Falhado'){
+                status_correto = 'failed';
             }
-
-            console.log(status);
 
             // Faz a requisição "PATCH" para editar o status do pagamento
             $http({
                 method: "PATCH",
-                url: config.URL + "payments/" + array_info[0],
+                url: config.URL + "payments/" + id_pagamento,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + config.KEY
                 },
                 data: {
-                    "id": array_info[0],
-                    "status": status
+                    "id": id_pagamento,
+                    "status": status_correto
                 }
             }).then(function (response) {
 
