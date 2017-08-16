@@ -2,8 +2,8 @@
 
 angular.module('myApp.cartao_add', ['ngRoute'])
 
-    .controller('CartaoAddCtrl', ["$scope", "$location", "$http", "config", "$window",
-        function ($scope, $location, $http, config, $window) {
+    .controller('CartaoAddCtrl', ["$scope", "$location", "$http", "config", "$window", "card",
+        function ($scope, $location, $http, config, $window, card) {
             var vm = this;
 
             // Função para resetar os campos do formulário de criacão de um novo cartão
@@ -20,22 +20,7 @@ angular.module('myApp.cartao_add', ['ngRoute'])
             $scope.createCard = function (nome,numero,bandeira,mes,ano,limite) {
 
                 // Faz a requisição "POST" para criar um novo cartão
-                $http({
-                    method: "POST",
-                    url: config.URL + "cards",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
-                    },
-                    data: {
-                        "name": nome,
-                        "number": numero,
-                        "brand": bandeira,
-                        "exp_month":mes,
-                        "exp_year": ano,
-                        "limit": limite
-                    }
-                }).then(function (response) {
+                card.post(nome,numero,bandeira,mes,ano,limite).then(function (response) {
                     vm.data = response.data;
 
                     // Mensagem adicionada para aparecer na view como retorno para o usuário

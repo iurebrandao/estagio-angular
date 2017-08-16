@@ -2,8 +2,8 @@
 
 angular.module('myApp.pagamento', ['ngRoute'])
 
-    .controller('PagamentoCtrl', ["$scope", "$location", "$http", "$routeParams", "config", "$window",
-	function ($scope, $location, $http, $routeParams, config, $window) {
+    .controller('PagamentoCtrl', ["$scope", "$location", "$http", "$routeParams", "config", "$window", "payment",
+	function ($scope, $location, $http, $routeParams, config, $window, payment) {
         var vm = this;
 
         // Funcão que recupera os pagamentos de um determinado cartão a partir do "id" dele
@@ -13,14 +13,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
             document.getElementById("loader").style.display = "block";
 
             // Faz a requisição "GET" para receber os pagamentos de um determinado cartão
-            $http({
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
-                },
-                url: config.URL + "cards/" + card_id + "/payments"
-            }).then(function (response) {
+            payment.get(card_id).then(function (response) {
 
                 // Esconde o elemento "spinner" que indica o carregamento das informações para o usuário
                 document.getElementById("loader").style.display = "none";
@@ -61,19 +54,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
         vm.makePayment = function (id_cartao,valor) {
 
             // Faz a requisição "POST" para fazer o pagamento de um cartão
-            $http({
-                method: "POST",
-                url: config.URL + "payments",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
-                },
-                data: {
-                    "card_id": id_cartao,
-                    "amount": valor
-                }
-
-            }).then(function (response) {
+            payment.post(id_cartao, valor).then(function (response) {
 
                 // Adiciona as informações de retorno da requisição na variável do controler
                 vm.data = response.data;
@@ -101,18 +82,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
         vm.deletePayment = function (pay_id) {
 
             // Faz a requisição "DELETE" para deletar um pagamento
-            $http({
-                method: "DELETE",
-                url: config.URL + "payments/" + pay_id,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
-                },
-                data: {
-                    "id": pay_id
-                }
-
-            }).then(function (response) {
+            payment.delete(pay_id).then(function (response) {
 
                 // Adiciona as informações de retorno da requisição na variável do controler
                 vm.data = response.data;
@@ -153,18 +123,7 @@ angular.module('myApp.pagamento', ['ngRoute'])
             }
 
             // Faz a requisição "PATCH" para editar o status do pagamento
-            $http({
-                method: "PATCH",
-                url: config.URL + "payments/" + id_pagamento,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + $window.localStorage.getItem("key")
-                },
-                data: {
-                    "id": id_pagamento,
-                    "status": status_correto
-                }
-            }).then(function (response) {
+            payment.patch(id_pagamento, status_correto).then(function (response) {
 
                 // Mensagem adicionada para aparecer na view como retorno para o usuário
                 var msg_user = "Pagamento editado com sucesso!";
@@ -186,6 +145,5 @@ angular.module('myApp.pagamento', ['ngRoute'])
 
         vm.cartaoId = $routeParams.cartaoId;
         vm.getPayments(vm.cartaoId);
-
 
 }]);
